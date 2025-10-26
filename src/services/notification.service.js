@@ -31,7 +31,7 @@ class NotificationService {
                 </ul>
                 
                 <p>
-                    <a href="http://localhost:8080/report/${report.testCode}"
+                    <a href="https://email.arkagme.me/report/${report.testCode}"
                        style="background: #4F46E5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                         View Detailed Report
                     </a>
