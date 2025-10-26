@@ -11,10 +11,7 @@ class OutlookService {
     this.redirectUri = process.env.OUTLOOK_REDIRECT_URI;
   }
 
-  /**
-   * Get access token using client credentials flow
-   * @returns {Promise<string>} Access token
-   */
+
   async getAccessToken() {
     try {
       const credential = new ClientSecretCredential(
@@ -55,10 +52,7 @@ class OutlookService {
   }
 
 
-  /**
-   * Get Microsoft Graph client
-   * @returns {Promise<Client>} Graph client
-   */
+
   async getGraphClient() {
     if (!this.accessToken) {
       await this.getAccessToken();
@@ -71,12 +65,7 @@ class OutlookService {
     });
   }
 
-  /**
-   * Search for email with specific test code
-   * @param {string} testCode - Test code to search for
-   * @param {string} userEmail - User email for mailbox access
-   * @returns {Promise<object>} Email details if found
-   */
+
     async searchEmail(testCode, email) {
         try {
             const accessToken = await this.getAccessToken();
@@ -108,13 +97,7 @@ class OutlookService {
         }
     }
 
-  /**
-   * Get folder name from folder ID
-   * @param {Client} client - Graph client
-   * @param {string} userEmail - User email
-   * @param {string} folderId - Folder ID
-   * @returns {Promise<string>} Folder name
-   */
+
   async getFolderName(client, userEmail, folderId) {
     try {
       const folder = await client
@@ -138,11 +121,7 @@ class OutlookService {
     }
   }
 
-  /**
-   * List all folders (for debugging)
-   * @param {string} userEmail - User email
-   * @returns {Promise<Array>} List of folders
-   */
+
   async listFolders(userEmail) {
     try {
       const client = await this.getGraphClient();
@@ -157,12 +136,7 @@ class OutlookService {
     }
   }
 
-  /**
-   * Mark email as read
-   * @param {string} userEmail - User email
-   * @param {string} messageId - Message ID
-   * @returns {Promise<void>}
-   */
+
   async markAsRead(userEmail, messageId) {
     try {
       const client = await this.getGraphClient();

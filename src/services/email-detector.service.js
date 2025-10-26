@@ -40,7 +40,7 @@ class EmailDetectorService {
 
     // loop through all Gmail providers
     for (const provider of gmailProviders) {
-      // search test email for this specific Gmail account
+
       const emails = await gmailService.searchTestEmail(testCode, provider);
 
       if (emails.length > 0) {
@@ -51,7 +51,7 @@ class EmailDetectorService {
           status: 'received'
         })));
       } else {
-        // only push a 'notreceived' entry if nothing was found during the final attempt
+
         if (attempt === maxAttempts) {
           results.push({
             providerId: provider.id,
@@ -68,7 +68,6 @@ class EmailDetectorService {
       break;
     }
 
-    // wait before retrying
     await delay(5000);
   }
 

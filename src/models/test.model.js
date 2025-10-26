@@ -93,18 +93,17 @@ const testSchema = new mongoose.Schema({
   metadata: {
     userAgent: String,
     ipAddress: String,
-    duration: Number // in milliseconds
+    duration: Number 
   }
 }, {
   timestamps: true
 });
 
-// Index for efficient queries
 testSchema.index({ userEmail: 1, createdAt: -1 });
 testSchema.index({ status: 1, createdAt: -1 });
 testSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-// Calculate deliverability score before saving
+// Calculating deliverability score before saving
 testSchema.pre('save', function(next) {
   if (this.status === 'completed') {
     const totalInboxes = this.results.length;
@@ -119,7 +118,7 @@ testSchema.pre('save', function(next) {
   next();
 });
 
-// Static method to get user's test history
+
 testSchema.statics.getUserHistory = function(userEmail, limit = 10) {
   return this.find({ userEmail })
     .sort({ createdAt: -1 })

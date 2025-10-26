@@ -15,10 +15,7 @@ class YahooService {
     };
   }
 
-  /**
-   * Connect to Yahoo IMAP server
-   * @returns {Promise<Imap>} IMAP connection
-   */
+
   async connect() {
     return new Promise((resolve, reject) => {
       const imap = new Imap(this.imapConfig);
@@ -36,12 +33,7 @@ class YahooService {
     });
   }
 
-  /**
-   * Search for email with specific test code
-   * @param {string} testCode - Test code to search for
-   * @param {string} userEmail - Sender's email (optional for filtering)
-   * @returns {Promise<object>} Email details if found
-   */
+
   async searchEmail(testCode, userEmail = null) {
     let imap;
     
@@ -69,14 +61,7 @@ class YahooService {
     }
   }
 
-  /**
-   * Search in specific folder
-   * @param {Imap} imap - IMAP connection
-   * @param {string} folderName - Folder name
-   * @param {string} testCode - Test code
-   * @param {string} userEmail - User email
-   * @returns {Promise<object>} Email details if found
-   */
+
   async searchInFolder(imap, folderName, testCode, userEmail) {
     return new Promise((resolve, reject) => {
       imap.openBox(folderName, true, (err, box) => {
@@ -149,11 +134,7 @@ class YahooService {
     });
   }
 
-  /**
-   * Map Yahoo folder names to standard names
-   * @param {string} folderName - Yahoo folder name
-   * @returns {string} Standard folder name
-   */
+
   mapFolderName(folderName) {
     const mapping = {
       'INBOX': 'inbox',
@@ -164,10 +145,7 @@ class YahooService {
     return mapping[folderName] || 'inbox';
   }
 
-  /**
-   * List all folders (for debugging)
-   * @returns {Promise<Array>} List of folders
-   */
+
   async listFolders() {
     let imap;
     

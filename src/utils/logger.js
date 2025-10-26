@@ -1,7 +1,7 @@
 const winston = require('winston');
 const config = require('../config/env');
 
-// Define log format
+
 const logFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   winston.format.errors({ stack: true }),
@@ -9,7 +9,7 @@ const logFormat = winston.format.combine(
   winston.format.json()
 );
 
-// Create console format for better readability
+
 const consoleFormat = winston.format.combine(
   winston.format.colorize(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
@@ -29,13 +29,13 @@ const logger = winston.createLogger({
   transports: []
 });
 
-// Add different transports based on environment
+
 if (config.env === 'development') {
-  // Log to files and console in development
+
   logger.add(new winston.transports.File({
     filename: 'logs/error.log',
     level: 'error',
-    maxsize: 5242880, // 5MB
+    maxsize: 5242880, 
     maxFiles: 5
   }));
   logger.add(new winston.transports.File({
@@ -47,7 +47,7 @@ if (config.env === 'development') {
     format: consoleFormat
   }));
 } else if (config.env === 'production') {
-  // Log only to console in production
+
   logger.add(new winston.transports.Console({
     format: consoleFormat
   }));

@@ -1,11 +1,7 @@
 const Joi = require('joi');
 const { isValidEmail } = require('../utils/helper');
 
-/**
- * Validate request using Joi schema
- * @param {object} schema - Joi schema
- * @returns {Function} Middleware function
- */
+
 const validate = (schema) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body, {
@@ -30,9 +26,7 @@ const validate = (schema) => {
   };
 };
 
-/**
- * Validation schemas
- */
+
 const schemas = {
   createTest: Joi.object({
     userEmail: Joi.string()
@@ -66,9 +60,7 @@ const schemas = {
   })
 };
 
-/**
- * Custom email validation middleware
- */
+
 const validateEmail = (req, res, next) => {
   const { userEmail } = req.body;
 

@@ -4,10 +4,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const logger = require('../utils/logger');
 
-/**
- * Get report by test code
- * GET /api/v1/reports/:testCode
- */
+
 exports.getReport = async (req, res, next) => {
   try {
     const { testCode } = req.params;
@@ -16,23 +13,22 @@ exports.getReport = async (req, res, next) => {
     const report = await reportService.getReport(testCode);
 
     if (format === 'pdf') {
-      // Generate PDF
+
       const pdfPath = path.join(__dirname, '../../reports', `${testCode}.pdf`);
       
-      // Ensure reports directory exists
+
       await fs.mkdir(path.dirname(pdfPath), { recursive: true });
 
-      // Generate PDF
+
       await pdfGenerator.generateReport(report, pdfPath);
 
-      // Send PDF file
+
       res.download(pdfPath, `report-${testCode}.pdf`, async (err) => {
         if (err) {
           logger.error(`Error sending PDF: ${err.message}`);
           next(err);
         }
         
-        // Clean up PDF file after sending
         try {
           await fs.unlink(pdfPath);
         } catch (cleanupErr) {
@@ -41,7 +37,7 @@ exports.getReport = async (req, res, next) => {
       });
 
     } else {
-      // Return JSON response
+
       res.status(200).json({
         status: 'success',
         data: report
@@ -53,10 +49,7 @@ exports.getReport = async (req, res, next) => {
   }
 };
 
-/**
- * Generate and send report via email
- * POST /api/v1/reports/:testCode/send
- */
+
 exports.sendReport = async (req, res, next) => {
   try {
     const { testCode } = req.params;
@@ -79,10 +72,7 @@ exports.sendReport = async (req, res, next) => {
   }
 };
 
-/**
- * Get report summary (lightweight version)
- * GET /api/v1/reports/:testCode/summary
- */
+
 exports.getReportSummary = async (req, res, next) => {
   try {
     const { testCode } = req.params;

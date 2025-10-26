@@ -5,7 +5,7 @@ const errorMiddleware = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
-  // Log error
+
   logger.error(`Error: ${error.message}`, {
     stack: err.stack,
     url: req.originalUrl,

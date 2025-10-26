@@ -18,10 +18,6 @@ class EmailSender {
     });
   }
 
-  /**
-   * Verify SMTP connection
-   * @returns {Promise<boolean>}
-   */
   async verifyConnection() {
     try {
       await this.transporter.verify();
@@ -60,11 +56,7 @@ class EmailSender {
     }
   }
 
-  /**
-   * Send test email
-   * @param {string} to - Recipient email
-   * @returns {Promise<object>}
-   */
+
   async sendTestEmail(to) {
     const subject = 'Email Spam Report Tool - Test Email';
     const html = `
@@ -83,11 +75,6 @@ class EmailSender {
     return this.sendEmail({ to, subject, html });
   }
 
-  /**
-   * Send welcome email
-   * @param {string} to - Recipient email
-   * @returns {Promise<object>}
-   */
   async sendWelcomeEmail(to) {
     const subject = 'Welcome to Email Spam Report Tool';
     const html = `
@@ -163,12 +150,7 @@ class EmailSender {
     return this.sendEmail({ to, subject, html });
   }
 
-  /**
-   * Send error notification to admin
-   * @param {string} errorMessage - Error message
-   * @param {object} context - Additional context
-   * @returns {Promise<object>}
-   */
+
   async sendErrorNotification(errorMessage, context = {}) {
     try {
       const subject = `⚠️ Error Alert - Email Spam Report Tool`;
@@ -176,9 +158,8 @@ class EmailSender {
         // ...existing HTML template...
       `;
 
-      // Send to admin email (from SMTP_USER)
       return this.sendEmail({
-        to: process.env.SMTP_USER, // Changed from config.smtp.user
+        to: process.env.SMTP_USER, 
         subject,
         html
       });
@@ -188,11 +169,7 @@ class EmailSender {
     }
   }
 
-  /**
-   * Send bulk emails
-   * @param {Array} recipients - Array of recipient objects [{to, subject, html}]
-   * @returns {Promise<Array>} Array of results
-   */
+
   async sendBulkEmails(recipients) {
     const results = [];
 
@@ -212,12 +189,7 @@ class EmailSender {
     return results;
   }
 
-  /**
-   * Generate email template with dynamic content
-   * @param {string} template - Template name
-   * @param {object} data - Template data
-   * @returns {string} HTML content
-   */
+
   generateTemplate(template, data) {
     const templates = {
       'test-initiated': (data) => `

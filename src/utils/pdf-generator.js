@@ -4,12 +4,7 @@ const path = require('path');
 const logger = require('./logger');
 
 class PDFGenerator {
-  /**
-   * Generate PDF report
-   * @param {object} reportData - Report data
-   * @param {string} outputPath - Output file path
-   * @returns {Promise<string>} Path to generated PDF
-   */
+
   async generateReport(reportData, outputPath) {
     return new Promise((resolve, reject) => {
       try {
@@ -48,9 +43,7 @@ class PDFGenerator {
     });
   }
 
-  /**
-   * Add header to PDF
-   */
+
   addHeader(doc, reportData) {
     doc
       .fontSize(24)
@@ -74,9 +67,6 @@ class PDFGenerator {
       .moveDown(1);
   }
 
-  /**
-   * Add score section
-   */
   addScore(doc, reportData) {
     const { deliverabilityScore, overallStatus } = reportData;
 
@@ -102,9 +92,7 @@ class PDFGenerator {
     doc.moveDown(1);
   }
 
-  /**
-   * Add summary section
-   */
+
   addSummary(doc, reportData) {
     const { summary } = reportData;
 
@@ -143,9 +131,7 @@ class PDFGenerator {
     doc.moveDown(1);
   }
 
-  /**
-   * Add results table
-   */
+
   addResults(doc, reportData) {
     doc
       .fontSize(16)
@@ -208,9 +194,7 @@ class PDFGenerator {
     doc.moveDown(1);
   }
 
-  /**
-   * Add recommendations section
-   */
+
   addRecommendations(doc, reportData) {
     if (doc.y > 650) {
       doc.addPage();
@@ -244,9 +228,7 @@ class PDFGenerator {
     });
   }
 
-  /**
-   * Add footer
-   */
+
   addFooter(doc, reportData) {
     const bottomY = 770;
     
@@ -262,9 +244,7 @@ class PDFGenerator {
       );
   }
 
-  /**
-   * Get color based on status
-   */
+
   getStatusColor(status) {
     const colors = {
       excellent: '#10b981',
@@ -279,9 +259,7 @@ class PDFGenerator {
     return colors[status] || '#6b7280';
   }
 
-  /**
-   * Get color for recommendation type
-   */
+
   getRecommendationColor(type) {
     const colors = {
       success: '#10b981',

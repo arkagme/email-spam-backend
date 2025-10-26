@@ -77,12 +77,6 @@ class TestCodeService {
     }
   }
 
-  /**
-   * Update test status
-   * @param {string} testCode - Test code
-   * @param {string} status - New status
-   * @returns {Promise<object>} Updated test
-   */
   async updateTestStatus(testCode, status) {
     try {
       const test = await Test.findOneAndUpdate(

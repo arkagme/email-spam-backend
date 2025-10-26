@@ -19,8 +19,6 @@ module.exports = {
 
   ],
 
-
-  // Folder detection mappings
   folderMappings: {
     gmail: {
       inbox: 'INBOX',
@@ -30,12 +28,11 @@ module.exports = {
     },
   },
 
-  // Detection timeouts (in seconds)
-  detectionTimeout: 300, // 5 minutes
+  detectionTimeout: 300, 
 
-  // Retry configuration
+
   retryConfig: {
     maxRetries: 10,
-    retryDelay: 15000 // 15 seconds between retries
+    retryDelay: 15000 
   }
 };

@@ -4,7 +4,7 @@ const connectDB = require('./src/config/database');
 const logger = require('./src/utils/logger');
 require('dotenv').config();
 
-// Handle uncaught exceptions
+
 process.on('uncaughtException', (err) => {
   logger.error('UNCAUGHT EXCEPTION! Shutting down...');
   logger.error(err.name, err.message);
