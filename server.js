@@ -2,6 +2,7 @@ const app = require('./src/app');
 const config = require('./src/config/env');
 const connectDB = require('./src/config/database');
 const logger = require('./src/utils/logger');
+require('dotenv').config();
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
