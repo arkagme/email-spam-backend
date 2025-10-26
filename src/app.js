@@ -18,7 +18,7 @@ app.use(helmet());
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:8080'],
+  origin: ['http://localhost:8080','http://email.arkagme.me'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   //allowedHeaders: ['Content-Type', 'Authorization']
