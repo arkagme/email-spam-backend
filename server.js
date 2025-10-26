@@ -3,8 +3,6 @@ const config = require('./src/config/env');
 const connectDB = require('./src/config/database');
 const logger = require('./src/utils/logger');
 require('dotenv').config();
-console.log('Starting app (debug)');
-console.log('Environment variables:', process.env.NODE_ENV, process.env.MONGODB_URI);
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
