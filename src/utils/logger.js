@@ -45,7 +45,7 @@ const logger = winston.createLogger({
 });
 
 // If not in production, log to console with custom format
-if (config.env !== 'production') {
+if (config.env === 'production' || config.env === 'development') {
   logger.add(new winston.transports.Console({
     format: consoleFormat
   }));
