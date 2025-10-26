@@ -110,9 +110,6 @@ Update `.env` with your actual test inbox emails:
 ```env
 TEST_GMAIL_1=test1@gmail.com
 TEST_GMAIL_2=test2@gmail.com
-TEST_OUTLOOK_1=test1@outlook.com
-TEST_OUTLOOK_2=test2@outlook.com
-TEST_YAHOO_1=test1@yahoo.com
 ```
 
 ### SMTP Configuration (for notifications)
