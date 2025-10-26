@@ -9,7 +9,7 @@ const logFormat = winston.format.combine(
   winston.format.json()
 );
 
-// Create console format for development
+// Create console format for better readability
 const consoleFormat = winston.format.combine(
   winston.format.colorize(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
@@ -22,30 +22,32 @@ const consoleFormat = winston.format.combine(
   })
 );
 
-// Create logger
 const logger = winston.createLogger({
   level: config.env === 'development' ? 'debug' : 'info',
   format: logFormat,
   defaultMeta: { service: 'email-spam-report' },
-  transports: [
-    // Write all logs with level 'error' and below to 'error.log'
-    new winston.transports.File({ 
-      filename: 'logs/error.log', 
-      level: 'error',
-      maxsize: 5242880, // 5MB
-      maxFiles: 5
-    }),
-    // Write all logs to 'combined.log'
-    new winston.transports.File({ 
-      filename: 'logs/combined.log',
-      maxsize: 5242880, // 5MB
-      maxFiles: 5
-    })
-  ]
+  transports: []
 });
 
-// If not in production, log to console with custom format
-if (config.env === 'production' || config.env === 'development') {
+// Add different transports based on environment
+if (config.env === 'development') {
+  // Log to files and console in development
+  logger.add(new winston.transports.File({
+    filename: 'logs/error.log',
+    level: 'error',
+    maxsize: 5242880, // 5MB
+    maxFiles: 5
+  }));
+  logger.add(new winston.transports.File({
+    filename: 'logs/combined.log',
+    maxsize: 5242880,
+    maxFiles: 5
+  }));
+  logger.add(new winston.transports.Console({
+    format: consoleFormat
+  }));
+} else if (config.env === 'production') {
+  // Log only to console in production
   logger.add(new winston.transports.Console({
     format: consoleFormat
   }));
